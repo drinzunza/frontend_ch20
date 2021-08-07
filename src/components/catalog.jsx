@@ -8,14 +8,13 @@ class Catalog extends Component {
   state = {
     catalog: [],
     categories: [],
-    filter: ""
+    filter: "",
   };
 
   render() {
-
     let itemsToDisplay = this.state.catalog;
-    if(this.state.filter) {
-      itemsToDisplay = itemsToDisplay.filter( item => item.category === this.state.filter  );
+    if (this.state.filter) {
+      itemsToDisplay = itemsToDisplay.filter((item) => item.category === this.state.filter);
     }
 
     return (
@@ -24,23 +23,36 @@ class Catalog extends Component {
         <h5>We have {this.state.catalog.length} products for you</h5>
 
         <div className="filter-buttons">
-          <button className="btn btn-dark" onClick={this.clearFilter} >Show all</button>
-          { this.state.categories.map(cat => <button onClick={() => { this.filterByCat(cat) }} key={cat} className="btn btn-info">{cat}</button>) }
+          <button className="btn btn-dark" onClick={this.clearFilter}>
+            Show all
+          </button>
+          {this.state.categories.map((cat) => (
+            <button
+              onClick={() => {
+                this.filterByCat(cat);
+              }}
+              key={cat}
+              className="btn btn-info"
+            >
+              {cat}
+            </button>
+          ))}
         </div>
 
         <div className="item-container">
-          {itemsToDisplay.map(obj => <Item key={obj._id} data={obj}></Item>)}
+          {itemsToDisplay.map((obj) => (
+            <Item key={obj._id} data={obj}></Item>
+          ))}
         </div>
       </div>
     );
   }
 
   clearFilter = () => {
-    this.setState({ filter: ""})
-    //this.filterByCat("");
+    this.setState({ filter: "" });
   };
 
-  filterByCat = (cat) => {    
+  filterByCat = (cat) => {
     this.setState({ filter: cat });
   };
 
@@ -51,11 +63,11 @@ class Catalog extends Component {
     let data = service.getCatalog();
 
     let categories = [];
-    for(let i =0; i< data.length; i++) {
+    for (let i = 0; i < data.length; i++) {
       let category = data[i].category;
 
       // if the category does not exist inside the categories array
-      if(!categories.includes(category)) {
+      if (!categories.includes(category)) {
         categories.push(category);
       }
     }
@@ -65,3 +77,6 @@ class Catalog extends Component {
 }
 
 export default Catalog;
+
+
+

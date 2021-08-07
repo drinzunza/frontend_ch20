@@ -21,9 +21,3 @@ function App() {
 }
 
 export default App;
-
-/*
-Investigation HW:
-javascript this
-arrow function
-*/
